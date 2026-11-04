@@ -21,6 +21,15 @@ This is an unofficial, **non-commercial** reference for study, published with
 attribution. It is not affiliated with or endorsed by the author. If you are the
 rights holder and would like changes, please open an issue.
 
+## Files
+
+- `index.html` — the searchable site (embeds the full dataset).
+- `ThaiTone.ase` — Adobe Swatch Exchange library: all 330 colors as **CMYK**
+  swatches, grouped by segment, named `T-code Romanization`. Opens in Photoshop,
+  Illustrator, InDesign, Affinity and PhotoCraft. Because it stores the printed CMYK,
+  each app converts to screen under its own color profile.
+- `thaitone.json` — the full dataset.
+
 ## Data
 
 `index.html` embeds the full dataset. A standalone `thaitone.json` is also included:
