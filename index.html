@@ -119,6 +119,19 @@ footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
 .achip:hover{border-color:var(--accent)}
 .achip[aria-pressed="true"]{background:var(--accent); color:#fff; border-color:var(--accent)}
 .envhint{font-size:11px; color:var(--muted); max-width:52ch}
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:18px}
+@media (max-width:760px){ .cards{grid-template-columns:1fr} }
+.info{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:13px 15px}
+.info h3{margin:0 0 7px; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--accent); font-weight:700}
+.info p{margin:0 0 7px; font-size:13px; line-height:1.5}
+.info p:last-child{margin-bottom:0}
+.info .links{display:flex; flex-wrap:wrap; gap:3px 9px}
+.info a{color:var(--accent); text-decoration:none}
+.info a:hover{text-decoration:underline}
+.downloads{font-size:13px; color:var(--muted); margin-top:12px; padding-top:13px;
+  border-top:1px solid var(--line); line-height:1.55}
+.downloads a{color:var(--accent); text-decoration:none; font-weight:600}
+.downloads a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -130,27 +143,38 @@ footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
   330 Thai traditional colors. Each color shows its code, Thai name, romanisation, English
   meaning, the <b>CMYK as printed on the deck</b>, and an sRGB hex derived by color-managed
   conversion for on-screen preview.</p>
-  <div class="src">
-    <b>ThaiTone&trade; color system &mdash; created by Prof. Pairoj Pittayamatee</b> (ไพโรจน์ พิทยเมธี).
-    The ThaiTone&trade; system and all of its Thai color names are his original work; this is an
-    unofficial, non-commercial digitization made to credit and help share his system.
-    <br><b>About the creator &amp; the system:</b>
-    <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">ThaiTone&trade; Color &mdash; official Facebook</a> &middot;
-    <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color fan-deck announcement</a> &middot;
-    <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">feature in The Nation</a> &middot;
-    <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">ThaiTone&trade; color reference (PDF)</a>.
-    <br><i>ThaiTone&trade; is the brand / trademark of its creator. The color system is shared freely;
-    this page uses the printed CMYK values and names with attribution, and is not affiliated with or
-    endorsed by the author.</i> The sRGB hex is an independent conversion (not official).
-    <br><br><b>Downloads:</b>
-    <a href="ThaiTone.ase" download>ThaiTone.ase</a> &mdash; 330 CMYK swatches (Photoshop, Illustrator, InDesign, Affinity, PhotoCraft) &middot;
+  <section class="cards">
+    <div class="info">
+      <h3>Creator</h3>
+      <p><b>Prof. Pairoj Pittayamatee</b> (ไพโรจน์ พิทยเมธี) created the ThaiTone&trade; system and its Thai color names.</p>
+      <p class="links">
+        <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">Official Facebook</a> &middot;
+        <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color deck</a> &middot;
+        <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">The Nation</a> &middot;
+        <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">Reference PDF</a>
+      </p>
+    </div>
+    <div class="info">
+      <h3>License</h3>
+      <p>ThaiTone&trade; permits general use of the color values and names <b>with attribution</b> to the &ldquo;ThaiTone&rdquo; system, for <b>non-commercial</b> use.</p>
+      <p>The original files and color guide may not be copied or altered for sale or distribution.</p>
+    </div>
+    <div class="info">
+      <h3>This page</h3>
+      <p>Made purely out of enthusiasm for this color system, with <b>no commercial intent</b>. It credits the source and is not affiliated with or endorsed by the author.</p>
+      <p>CMYK is transcribed from the cards; the sRGB hex is our own conversion. &ldquo;ThaiTone&trade;&rdquo; is the creator&rsquo;s trademark.</p>
+      <p>If you hold the rights and would like any change, please <a href="https://github.com/varanus-salvator/thaitone-colors/issues" target="_blank" rel="noopener">open an issue</a> &mdash; it will be addressed promptly.</p>
+    </div>
+  </section>
+
+  <p class="downloads"><b>Downloads:</b>
+    <a href="ThaiTone.ase" download>ThaiTone.ase</a> &mdash; 330 CMYK swatches for Photoshop, Illustrator, InDesign, Affinity &amp; PhotoCraft &middot;
     <a href="thaitone.json" download>thaitone.json</a> &mdash; full data.
-    The swatch file holds the printed <b>CMYK</b> values, so each app converts to screen under its own color profile.
-  </div>
+    The swatches store the printed CMYK, so each app converts under its own color profile.</p>
 </header>
 
 <details class="about">
-  <summary>About these colors &amp; the viewing-environment preview</summary>
+  <summary>How these colors work &mdash; CMYK vs. screen, Thai light &amp; the viewing-light preview</summary>
   <div class="body">
     <p><b>CMYK is the source; the hex is an interpretation.</b> The CMYK values are printed
     on the physical cards and are exact. There is no single &ldquo;correct&rdquo; RGB for a CMYK recipe
