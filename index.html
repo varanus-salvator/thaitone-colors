@@ -54,7 +54,8 @@ h1{font-size:30px; margin:0 0 6px; letter-spacing:-.01em}
 .group{margin:8px 0 26px}
 .group h2{font-size:15px; text-transform:uppercase; letter-spacing:.06em;
   color:var(--muted); margin:18px 0 10px; font-weight:600}
-.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:14px}
+.grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px}
+@media (max-width:760px){ .grid{grid-template-columns:repeat(2,1fr); gap:10px} }
 .card{background:var(--panel); border:1px solid var(--line); border-radius:12px;
   overflow:hidden; box-shadow:var(--shadow)}
 .chip{position:relative; aspect-ratio:3/2; display:block; padding:9px 11px;
