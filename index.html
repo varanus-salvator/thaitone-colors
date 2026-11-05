@@ -20,8 +20,12 @@
 .segbar{display:flex; gap:6px; margin:8px -16px 0; padding:0 16px 2px;
   overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
 .segbar::-webkit-scrollbar{display:none}
-.segbar{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);
-  mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+@media (max-width:759px){
+  .segbar{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);
+    mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+}
+/* wide screens: no swipe gesture with a mouse, so the families wrap instead of scrolling */
+@media (min-width:760px){ .segbar{flex-wrap:wrap; overflow:visible; margin:8px 0 0; padding:0} }
 .seg{flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
   border:1px solid var(--line); background:var(--panel); color:var(--ink);
   padding:4px 10px 4px 6px; border-radius:999px; font-size:12.5px; cursor:pointer;
@@ -120,7 +124,7 @@
       <button class="ord" id="ord-deck" aria-pressed="true">Deck order</button>
       <button class="ord" id="ord-art" aria-pressed="false">Tint&rarr;shade</button>
     </div>
-    <button class="lightbtn" id="lightbtn" aria-expanded="false" aria-controls="envpanel"><span class="sw" id="lightsw"></span><span id="lightlbl">Light</span> &#9662;</button>
+    <button class="lightbtn" id="lightbtn" aria-expanded="false" aria-controls="envpanel"><span class="sw" id="lightsw"></span><span id="lightlbl">Viewing light</span> &#9662;</button>
   </div>
   <div class="envrow" id="envpanel" hidden>
     <div class="pad" id="pad" role="slider" tabindex="0"
@@ -360,10 +364,10 @@ const lightbtn = document.getElementById("lightbtn");
 const lightlbl = document.getElementById("lightlbl");
 const lightsw = document.getElementById("lightsw");
 const envpanel = document.getElementById("envpanel");
-lightbtn.onclick = () => {
-  const open = envpanel.hidden;
-  envpanel.hidden = !open; lightbtn.setAttribute("aria-expanded", open);
-};
+function showEnv(open){ envpanel.hidden = !open; lightbtn.setAttribute("aria-expanded", open); }
+lightbtn.onclick = () => showEnv(envpanel.hidden);
+// open on wide screens, where the disc fits beside the info without crowding the colors
+showEnv(matchMedia("(min-width:760px)").matches);
 
 // anchor markers in the disc + clickable legend chips
 ENV_ANCHORS.forEach(a => {
@@ -383,7 +387,7 @@ function updateEnvInfo(x, y){
   const bright = y > 0.15 ? "bright" : (y < -0.15 ? "dark" : "mid");
   const temp = x < -0.15 ? "warm" : (x > 0.15 ? "cool" : "neutral");
   envnameEl.textContent = a ? a.label : "Custom light";
-  lightlbl.textContent = a ? (a.key==="ref" ? "Light" : a.label) : "Custom light";
+  lightlbl.textContent = a ? (a.key==="ref" ? "Viewing light" : a.label) : "Custom light";
   envmetaEl.textContent = a ? (a.lux + " · " + a.cct + " — " + a.note)
                             : (bright + ", " + temp + " light");
   [...legend.children].forEach(c => c.setAttribute("aria-pressed", a && c.dataset.key === a.key));
