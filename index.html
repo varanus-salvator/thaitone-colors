@@ -76,6 +76,16 @@
 .achip:hover{border-color:var(--accent)}
 .achip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
 .envhint{font-size:11px; color:var(--muted); max-width:52ch}
+/* phones: a smaller disc with the scenes beside it, so the colors still get most of the screen */
+@media (max-width:520px){
+  .envrow{flex-wrap:nowrap; gap:12px; align-items:flex-start}
+  .pad{width:112px; height:112px}
+  .pad .axis{font-size:8.5px}
+  .envinfo{min-width:0}
+  .envname{font-size:14px}
+  .envmeta,.envhint{display:none}
+  .achip{padding:2px 8px; font-size:11.5px}
+}
 .envhint a{color:var(--accent)}
 .count{color:var(--muted); font-size:12.5px; padding:10px 0 0}
 .group{margin:4px 0 18px}
@@ -366,8 +376,7 @@ const lightsw = document.getElementById("lightsw");
 const envpanel = document.getElementById("envpanel");
 function showEnv(open){ envpanel.hidden = !open; lightbtn.setAttribute("aria-expanded", open); }
 lightbtn.onclick = () => showEnv(envpanel.hidden);
-// open on wide screens, where the disc fits beside the info without crowding the colors
-showEnv(matchMedia("(min-width:760px)").matches);
+showEnv(true);   // the disc is the point of the page: Thai colors change under Thai light
 
 // anchor markers in the disc + clickable legend chips
 ENV_ANCHORS.forEach(a => {
