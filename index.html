@@ -91,8 +91,12 @@
 .group{margin:4px 0 18px}
 .group h2{font-size:12px; text-transform:uppercase; letter-spacing:.07em;
   color:var(--muted); margin:14px 0 8px; font-weight:600}
-.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:12px}
-@media (max-width:520px){ .grid{grid-template-columns:repeat(2,1fr); gap:8px} }
+/* the color page is wider than the text pages (About keeps style.css's 1180px) */
+.wrap{max-width:1480px}
+/* always exactly 5 per row: one row = one card of the physical fan deck.
+   Every hue family holds a multiple of 5 colors, so rows line up with the deck's cards. */
+.grid{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px}
+@media (max-width:900px){ .grid{gap:8px} }
 .card{background:var(--panel); border:1px solid var(--line); border-radius:10px;
   overflow:hidden; box-shadow:var(--shadow)}
 .chip{position:relative; aspect-ratio:3/2; display:block; padding:8px 10px; cursor:pointer}
@@ -109,6 +113,17 @@
 .meta .row{display:flex; justify-content:space-between; gap:6px; font-size:11.5px;
   color:var(--muted); font-variant-numeric:tabular-nums}
 .meta .hex{color:var(--ink); font-weight:600; cursor:pointer}
+/* phones: still 5 across, so each card shows only its swatch, code and Thai name;
+   tapping a swatch copies its hex as before. (After the base .card/.chip rules so it wins.) */
+@media (max-width:620px){
+  .grid{gap:5px}
+  .card{border-radius:7px}
+  .chip{aspect-ratio:3/4; padding:0}
+  .chip .code{top:4px; left:5px; right:auto; font-size:9px}
+  .chip .name{left:5px; right:4px; bottom:4px; font-size:10.5px; line-height:1.15;
+    max-height:3.45em; overflow:hidden}
+  .meta{display:none}
+}
 .toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
   background:var(--ink); color:var(--bg); padding:9px 16px; border-radius:999px;
   font-size:13px; opacity:0; pointer-events:none; transition:opacity .18s}
