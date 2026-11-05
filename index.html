@@ -13,11 +13,8 @@
 <style>
 .controls{position:sticky; top:0; z-index:10; background:var(--bg);
   padding:8px 0 8px; border-bottom:1px solid var(--line)}
-#q{width:100%; padding:9px 13px; font-size:15px; border:1px solid var(--line);
-  border-radius:10px; background:var(--panel); color:var(--ink); font-family:inherit}
-#q:focus{outline:2px solid var(--accent); outline-offset:0}
 /* hue families: one row that scrolls sideways instead of wrapping */
-.segbar{display:flex; gap:6px; margin:8px -16px 0; padding:0 16px 2px;
+.segbar{display:flex; gap:6px; margin:0 -16px; padding:0 16px 2px;
   overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
 .segbar::-webkit-scrollbar{display:none}
 @media (max-width:759px){
@@ -25,7 +22,7 @@
     mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
 }
 /* wide screens: no swipe gesture with a mouse, so the families wrap instead of scrolling */
-@media (min-width:760px){ .segbar{flex-wrap:wrap; overflow:visible; margin:8px 0 0; padding:0} }
+@media (min-width:760px){ .segbar{flex-wrap:wrap; overflow:visible; margin:0; padding:0} }
 .seg{flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
   border:1px solid var(--line); background:var(--panel); color:var(--ink);
   padding:4px 10px 4px 6px; border-radius:999px; font-size:12.5px; cursor:pointer;
@@ -130,7 +127,6 @@
 </header>
 
 <div class="controls">
-  <input id="q" type="search" placeholder="Search code, Thai, romanisation or meaning…" autocomplete="off">
   <div class="segbar" id="segbar"></div>
   <div class="orderrow">
     <div class="toggle" role="group" aria-label="Order">
@@ -181,7 +177,7 @@ const countEl = document.getElementById("count");
 const toast = document.getElementById("toast");
 document.getElementById("meta-note").textContent = DATA.note;
 
-let activeSeg = null, query = "", order = "deck";
+let activeSeg = null, order = "deck";
 
 // --- viewing environment: a continuous 2D light field ---
 // x: -1 warm .. +1 cool (white point).  y: -1 dark .. +1 bright (illuminance).
@@ -313,11 +309,7 @@ function applyEnv(){
 }
 
 function render(){
-  const q = query.trim().toLowerCase();
-  let list = cols.filter(c => !activeSeg || c.segment===activeSeg);
-  if(q) list = list.filter(c =>
-    c.code.toLowerCase().includes(q) || (c.thai||"").includes(query.trim()) ||
-    (c.latin||"").toLowerCase().includes(q) || (c.en||"").toLowerCase().includes(q));
+  const list = cols.filter(c => !activeSeg || c.segment===activeSeg);
   countEl.textContent = list.length + " of " + cols.length + " colors";
   if(!list.length){ results.innerHTML = '<div class="empty">No colors match.</div>'; return; }
   // group by segment, in canonical order
@@ -346,7 +338,6 @@ results.addEventListener("click", e => {
   }).catch(()=>{});
 });
 
-document.getElementById("q").addEventListener("input", e => { query = e.target.value; render(); });
 
 // order toggle: deck order vs artistic (tint -> shade within each hue family)
 function setOrder(o){

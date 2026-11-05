@@ -11,18 +11,82 @@
 <link rel="stylesheet" href="style.css">
 <script>try{const t=localStorage.getItem("tt-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-main{max-width:68ch; padding-bottom:8px}
-.lead{font-size:16px; margin:8px 0 22px}
-section{margin:0 0 26px}
-h2{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
+/* the 330 colors in deck order; filled from thaitone.json, a hue sweep until then */
+.stripe{display:flex; height:64px; border-radius:14px; overflow:hidden; margin:6px 0 22px;
+  box-shadow:var(--shadow);
+  background:linear-gradient(to right,#b82c23,#d9531e,#e98a1f,#f0b323,#f2d33a,#a7c43c,#3f9b5a,#1f8a80,#2c5aa0,#4b3f93,#6e3b8f,#b0436e)}
+.stripe i{flex:1 1 0; min-width:0}
+.hero h2{font-size:28px; line-height:1.2; letter-spacing:-.015em; margin:0 0 10px; max-width:22ch}
+.hero p{font-size:16px; color:var(--muted); margin:0 0 6px; max-width:62ch}
+.thai{font-family:"Noto Sans Thai",sans-serif}
+
+.eyebrow{font-size:11.5px; text-transform:uppercase; letter-spacing:.09em; color:var(--accent);
   font-weight:700; margin:0 0 8px}
-p{margin:0 0 10px; font-size:14.5px}
-.links{display:flex; flex-wrap:wrap; gap:4px 14px; font-size:14px}
-.links a, .dl a{text-decoration:none; font-weight:600}
-.links a:hover, .dl a:hover{text-decoration:underline}
-.dl{list-style:none; padding:0; margin:0}
-.dl li{margin:0 0 6px; font-size:14.5px}
-.back{display:inline-block; margin:6px 0 4px; font-size:14px; font-weight:600; text-decoration:none}
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:30px 0}
+@media (max-width:820px){ .cards{grid-template-columns:1fr} }
+.card{background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 18px 16px;
+  box-shadow:var(--shadow)}
+.card h3{font-size:17px; margin:0 0 8px; letter-spacing:-.005em}
+.card p{font-size:14px; margin:0 0 9px}
+.card p:last-child{margin-bottom:0}
+.pills{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px}
+.pills a{font-size:12.5px; font-weight:600; text-decoration:none; color:var(--ink);
+  border:1px solid var(--line); border-radius:999px; padding:4px 11px; background:var(--bg)}
+.pills a:hover{border-color:var(--accent); color:var(--accent)}
+.badge{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.03em;
+  background:var(--accent); color:var(--accent-ink); border-radius:6px; padding:2px 8px; margin-bottom:10px}
+details.more summary{cursor:pointer; font-size:13px; font-weight:600; color:var(--accent); list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::after{content:" \25be"}
+details.more[open] summary::after{content:" \25b4"}
+details.more p{margin-top:8px}
+
+.dl{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:0 0 8px}
+@media (max-width:620px){ .dl{grid-template-columns:1fr} }
+.dl a{display:flex; gap:14px; align-items:center; text-decoration:none; color:var(--ink);
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+  box-shadow:var(--shadow)}
+.dl a:hover{border-color:var(--accent)}
+.dl .ext{flex:0 0 auto; width:52px; height:52px; border-radius:12px; display:grid; place-items:center;
+  font-weight:700; font-size:13px; color:#fff}
+.dl .ase{background:conic-gradient(#b82c23,#e98a1f,#f2d33a,#3f9b5a,#2c5aa0,#6e3b8f,#b82c23)}
+.dl .json{background:#3b3a35; font-family:ui-monospace,Menlo,monospace}
+.dl b{display:block; font-size:15px}
+.dl .what{font-size:13px; color:var(--muted)}
+.fine{font-size:13px; color:var(--muted); margin:0 0 34px}
+
+.how{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin:0 0 30px}
+@media (max-width:820px){ .how{grid-template-columns:1fr} }
+.how .card.wide{grid-column:1 / -1}
+.visual{margin:4px 0 12px}
+/* CMYK vs screen: two gamuts that only partly overlap */
+.gamut{display:flex; align-items:center; height:70px}
+.gamut span{width:88px; height:62px; border-radius:50%; display:grid; place-items:center;
+  font-size:11px; font-weight:700; color:#fff; letter-spacing:.04em}
+.gamut .ink{background:rgba(214,64,90,.85); place-items:center start; padding-left:18px}
+.gamut .scr{place-items:center end; padding-right:12px}
+.gamut .scr{background:rgba(60,120,210,.8); margin-left:-30px; mix-blend-mode:multiply}
+:root[data-theme="dark"] .gamut .scr{mix-blend-mode:screen}
+/* one ThaiTone color under five Thai lights (values from the colors page's own transform) */
+.lights{display:grid; grid-template-columns:repeat(5,1fr); gap:6px}
+.lights div{border-radius:10px; aspect-ratio:1/1; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:6px; font-size:10.5px; font-weight:600; color:#fff; line-height:1.15}
+.lights small{display:block; font-weight:400; opacity:.85; font-variant-numeric:tabular-nums}
+/* a line becomes a wheel */
+.wheel{display:flex; align-items:center; gap:16px}
+.wheel .line{flex:1; height:14px; border-radius:7px;
+  background:linear-gradient(to right,#e0262e,#f08c1e,#f2d33a,#42a65a,#2a7fc4,#5b3ea0)}
+.wheel .arrow{color:var(--muted); font-size:18px}
+.wheel .disc{flex:0 0 auto; width:70px; height:70px; border-radius:50%;
+  background:conic-gradient(#e0262e,#f08c1e,#f2d33a,#42a65a,#2a7fc4,#5b3ea0,#b0367a,#e0262e)}
+.card .note{font-size:12.5px; color:var(--muted)}
+
+.contact-box{display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; justify-content:space-between;
+  background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px;
+  box-shadow:var(--shadow); margin:0 0 10px}
+.contact-box p{margin:0; font-size:14.5px}
+.contact-box .addr{font-weight:700; font-size:15px; user-select:all}
+.back{display:inline-block; margin:16px 0 0; font-size:14px; font-weight:600; text-decoration:none}
 </style>
 </head>
 <body>
@@ -33,77 +97,81 @@ p{margin:0 0 10px; font-size:14.5px}
 </header>
 
 <main>
-  <p class="lead">A searchable digitisation of the physical <b>ThaiTone&trade; color fan deck</b> &mdash;
-  330 Thai traditional colors. Each color shows its code, Thai name, romanisation, English
-  meaning, the <b>CMYK as printed on the deck</b>, and an sRGB hex derived by color-managed
-  conversion for on-screen preview.</p>
-
-  <section>
-    <h2>Creator</h2>
-    <p><b>Prof. Pairoj Pittayamatee</b> (ไพโรจน์ พิทยเมธี) created the ThaiTone&trade; system and its Thai color names.</p>
-    <p class="links">
-      <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">Official Facebook</a>
-      <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color deck</a>
-      <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">The Nation</a>
-      <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">Reference PDF</a>
-    </p>
+  <section class="hero">
+    <div class="stripe" id="stripe" role="img" aria-label="All 330 ThaiTone colors in deck order"></div>
+    <h2>330 Thai traditional colors, from the fan deck to your screen</h2>
+    <p>A digitisation of the physical <b>ThaiTone&trade; color fan deck</b>. Every color has its
+    code, Thai name, romanisation, English meaning, the <b>CMYK as printed on the deck</b>, and an
+    sRGB hex for on-screen preview.</p>
   </section>
 
-  <section>
-    <h2>License</h2>
-    <p>The creator released the <b>whole ThaiTone&trade; color system</b> &mdash; not a single file or subset &mdash; under a <b>Creative Commons</b> license (attribution, non-commercial), permitting general use of its color values and names <b>with attribution</b> to the &ldquo;ThaiTone&rdquo; system.</p>
-    <p>Those terms expressly allow the colors to be <b>shared and adapted with attribution</b>. The restriction is narrower: the creator&rsquo;s own files and graphic color guide may not be copied or altered to sell or hand out &mdash; so this page is an independent presentation of the freely-licensed values and names, not a copy of his files.</p>
-  </section>
+  <div class="cards">
+    <div class="card">
+      <p class="eyebrow">Creator</p>
+      <h3>Prof. Pairoj Pittayamatee</h3>
+      <p><span class="thai">ไพโรจน์ พิทยเมธี</span> created the ThaiTone&trade; system and its Thai color names. ThaiTone&trade; is his brand and trademark.</p>
+      <div class="pills">
+        <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color deck</a>
+        <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">The Nation</a>
+        <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">Reference PDF</a>
+      </div>
+    </div>
+    <div class="card">
+      <p class="eyebrow">License</p>
+      <span class="badge">CC BY-NC</span>
+      <p>The creator released the <b>whole ThaiTone&trade; color system</b> &mdash; not a single file or subset &mdash; under a <b>Creative Commons</b> license (attribution, non-commercial), permitting general use of its color values and names <b>with attribution</b> to the &ldquo;ThaiTone&rdquo; system.</p>
+      <details class="more">
+        <summary>What that allows</summary>
+        <p>Those terms expressly allow the colors to be <b>shared and adapted with attribution</b>. The restriction is narrower: the creator&rsquo;s own files and graphic color guide may not be copied or altered to sell or hand out &mdash; so this page is an independent presentation of the freely-licensed values and names, not a copy of his files.</p>
+      </details>
+    </div>
+    <div class="card">
+      <p class="eyebrow">This page</p>
+      <h3>Unofficial &amp; non-commercial</h3>
+      <p>We publish the openly-licensed <b>CMYK values</b> and, derived from them, an <b>on-screen (sRGB) approximation</b>, with the CMYK beside every color so anyone can check how we got there.</p>
+      <p class="note">It credits the source and is not affiliated with or endorsed by the author. CMYK is transcribed from the cards; the sRGB hex is our own conversion.</p>
+    </div>
+  </div>
 
-  <section>
-    <h2>This page</h2>
-    <p>We publish the openly-licensed <b>CMYK values</b> and, derived from them, an <b>on-screen (sRGB) approximation</b> &mdash; with the CMYK shown beside every color so anyone can check how we got there. A physical deck adds the real <b>printed</b> CMYK proof, which a screen cannot replace.</p>
-    <p>Unofficial and non-commercial; it credits the source and is not affiliated with or endorsed by the author. CMYK is transcribed from the cards; the sRGB hex is our own conversion. &ldquo;ThaiTone&trade;&rdquo; is the creator&rsquo;s trademark.</p>
-    <p>Questions, corrections or a copyright concern? Write to <span class="contact">lizard [at] lumphini [dot] org</span>.</p>
-  </section>
+  <p class="eyebrow">Downloads</p>
+  <div class="dl">
+    <a href="ThaiTone.ase" download><span class="ext ase">.ase</span><span><b>ThaiTone.ase</b><span class="what">330 CMYK swatches for Photoshop, Illustrator, InDesign, Affinity &amp; PhotoCraft</span></span></a>
+    <a href="thaitone.json" download><span class="ext json">{ }</span><span><b>thaitone.json</b><span class="what">The full data: codes, names, meanings, CMYK and hex</span></span></a>
+  </div>
+  <p class="fine">The swatches store the printed CMYK, so each app converts under its own color profile.</p>
 
-  <section>
-    <h2>Downloads</h2>
-    <ul class="dl">
-      <li><a href="ThaiTone.ase" download>ThaiTone.ase</a> &mdash; 330 CMYK swatches for Photoshop, Illustrator, InDesign, Affinity &amp; PhotoCraft</li>
-      <li><a href="thaitone.json" download>thaitone.json</a> &mdash; full data</li>
-    </ul>
-    <p>The swatches store the printed CMYK, so each app converts under its own color profile.</p>
-  </section>
+  <p class="eyebrow">How these colors work</p>
+  <div class="how">
+    <div class="card">
+      <h3>CMYK is the source; the hex is an interpretation</h3>
+      <div class="visual gamut" aria-hidden="true"><span class="ink">INK</span><span class="scr">SCREEN</span></div>
+      <p>The CMYK on the cards is exact. There is no single &ldquo;correct&rdquo; RGB for a CMYK recipe &mdash; it depends on the print profile and rendering intent &mdash; so our hex is one color-managed conversion, a safe, device-independent reference.</p>
+      <p>Screens emit light, ink reflects it, and their gamuts only partly overlap. Saturated reds and oranges that print well get clipped on screen, so these swatches are the <i>quietest</i> version of the colors. The brightest inks, fluorescents especially, can even look like dull earth tones on any display while being vivid in the hand &mdash; the printed deck stays the real reference.</p>
+    </div>
+    <div class="card" id="light">
+      <h3>Thai light brings them to life</h3>
+      <div class="visual lights" role="img" aria-label="Dangchad (T1010, vermilion) under five lights">
+        <div style="background:#BB2C22">sRGB<small>#BB2C22</small></div>
+        <div style="background:#E31E11">Beach<small>#E31E11</small></div>
+        <div style="background:#C82A1D">Golden hour<small>#C82A1D</small></div>
+        <div style="background:#B42F27">Rainy<small>#B42F27</small></div>
+        <div style="background:#983730">Night<small>#983730</small></div>
+      </div>
+      <p>The same color &mdash; <b>Dangchad</b>, vermilion, T1010 &mdash; reads very differently in blazing beach sun, warm golden hour, the flat grey of the rainy season or a city night. Colorfulness rises with brightness (the Hunt effect) and shifts with the light&rsquo;s color temperature.</p>
+      <p>The <b>viewing-light disc</b> on the colors page lets you try it: drag the point (up = brighter, left/right = warm/cool) or tap a Thai scene, and every swatch and hex recolors live. It is an illustrative approximation; the CMYK and the sRGB reference never change.</p>
+    </div>
+    <div class="card wide">
+      <h3>Why color is a wheel, not a line</h3>
+      <div class="visual wheel" aria-hidden="true"><div class="line"></div><span class="arrow">&rarr;</span><div class="disc"></div></div>
+      <p>Physics lays color on a straight line by wavelength, red to violet. Artists bend it into a wheel, because <i>purple does not exist</i> as a wavelength: the brain invents it when the short- and long-wave cones fire together, joining the two ends. That is why ThaiTone&rsquo;s own sequence runs red &rarr; &hellip; &rarr; red-violet and closes back toward red. The <b>Tint&rarr;shade</b> order on the colors page sorts each family along the painter&rsquo;s second axis: <i>tint</i> (with white), <i>tone</i> (greyed), <i>shade</i> (with black). <a href="https://www.youtube.com/watch?v=rE_5JLeC0kc" target="_blank" rel="noopener">A lovely explanation on video &#8599;</a></p>
+    </div>
+  </div>
 
-  <section>
-    <h2>How these colors work</h2>
-    <p><b>CMYK is the source; the hex is an interpretation.</b> The CMYK values are printed
-    on the physical cards and are exact. There is no single &ldquo;correct&rdquo; RGB for a CMYK recipe
-    &mdash; it depends on the assumed print profile and rendering intent &mdash; so the sRGB hex here is
-    one color-managed conversion, chosen as a safe, device-independent reference.</p>
-    <p><b>Why a screen can&rsquo;t match print.</b> Screens are additive (emitted light); ink is
-    subtractive (reflected light), and their gamuts only partly overlap. Saturated reds and
-    oranges that ink prints well get clipped by sRGB, so these reference swatches are the
-    <i>quietest</i> version of the colors.</p>
-    <p id="light"><b>Thai light brings them to life.</b> ThaiTone&trade; colors live outdoors in bright tropical
-    sun, under cool mall lighting, in warm golden hour, and in the flat grey of the rainy
-    season. Perceived colorfulness rises with illumination (the Hunt effect) and shifts with the
-    light&rsquo;s color temperature, so the same color reads very differently across these settings.
-    The <b>viewing-light disc</b> on the colors page (the <b>Light</b> button) is an <b>illustrative approximation</b> of that:
-    drag the point (vertical = brightness, horizontal = warm&harr;cool color temperature) and the
-    swatches recolor live. Named Thai scenes &mdash; beach, city, golden hour, food, night, rainy
-    season &mdash; are anchor points you can jump to. It applies a documented transform (saturation
-    and lightness from the Hunt effect, plus a white-point tint) and changes only the preview swatch
-    and the hex shown beside it &mdash; the underlying CMYK and the sRGB reference never change.</p>
-    <p><b>Why color is a wheel, not a line.</b> Physics lays color on a straight line by
-    wavelength (red&hellip;violet). Artists bend it into a wheel &mdash; and the reason is that
-    <i>purple does not exist</i> as a wavelength: it&rsquo;s a sensation the brain invents when the
-    short- and long-wave cones fire together, joining the two ends of the line. That is why
-    ThaiTone&rsquo;s own sequence runs red &rarr; &hellip; &rarr; red-violet and closes back toward red.
-    The <b>Tint&rarr;shade</b> order on the colors page arranges each hue family by the painter&rsquo;s
-    second axis &mdash; <i>tint</i> (with white) &rarr; <i>tone</i> (greyed) &rarr; <i>shade</i>
-    (with black). <a href="https://www.youtube.com/watch?v=rE_5JLeC0kc" target="_blank" rel="noopener">A lovely explanation on video &#8599;</a></p>
-    <p><b>Some colors a screen simply cannot show.</b> The brightest inks &mdash; fluorescent ones
-    especially &mdash; can throw back more visible light than a display can emit, so they read as dull
-    earth tones on any screen while being vivid in the hand. It&rsquo;s the same reason the printed
-    deck, not this page, is the real reference.</p>
-  </section>
+  <div class="contact-box">
+    <p>Questions, corrections or a copyright concern?</p>
+    <span class="addr contact">lizard [at] lumphini [dot] org</span>
+  </div>
 
   <a class="back" href="./">&larr; Back to the 330 colors</a>
 </main>
@@ -114,8 +182,11 @@ p{margin:0 0 10px; font-size:14.5px}
 </footer>
 </div>
 <script>
-(function(){var a='lizard'+'@'+['lumphini','org'].join('.');document.querySelectorAll('.contact').forEach(function(e){e.textContent=a})})();
+(function(){var a='lizard'+String.fromCharCode(64)+['lumphini','org'].join('.');document.querySelectorAll('.contact').forEach(function(e){e.textContent=a})})();
 document.getElementById("theme").onclick=function(){var r=document.documentElement,n=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("tt-theme",n)}catch(e){}};
+fetch("thaitone.json").then(function(r){return r.json()}).then(function(d){
+  document.getElementById("stripe").innerHTML=d.colours.map(function(c){return '<i style="background:'+c.hex+'"></i>'}).join("");
+}).catch(function(){});
 </script>
 </body>
 </html>
