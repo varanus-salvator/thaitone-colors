@@ -8,106 +8,48 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{const t=localStorage.getItem("tt-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
 <style>
-:root{
-  --bg:#f6f6f4; --panel:#fff; --ink:#1b1b1a; --muted:#6b6b66;
-  --line:#e4e4df; --accent:#8a6d3b; --shadow:0 1px 3px rgba(0,0,0,.08);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#15150f; --panel:#1f1f18; --ink:#ececdf; --muted:#9a9a8c;
-    --line:#32322a; --accent:#d8b66a; --shadow:0 1px 3px rgba(0,0,0,.5);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#15150f; --panel:#1f1f18; --ink:#ececdf; --muted:#9a9a8c;
-  --line:#32322a; --accent:#d8b66a; --shadow:0 1px 3px rgba(0,0,0,.5);
-}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{
-  background:var(--bg); color:var(--ink);
-  font-family:"Inter",system-ui,sans-serif; line-height:1.5;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:1180px; margin:0 auto; padding:0 16px}
-header{padding:38px 0 14px}
-h1{font-size:30px; margin:0 0 6px; letter-spacing:-.01em}
-.sub{color:var(--muted); font-size:15px; max-width:70ch; margin:0 0 14px}
-.sub a{color:var(--accent)}
-.src{font-size:13px; color:var(--muted); border-top:1px solid var(--line); padding-top:12px; margin-top:4px}
-.src a{color:var(--accent); text-decoration:none}
-.src a:hover{text-decoration:underline}
 .controls{position:sticky; top:0; z-index:10; background:var(--bg);
-  padding:12px 0; border-bottom:1px solid var(--line); margin-top:12px}
-#q{width:100%; padding:11px 14px; font-size:15px; border:1px solid var(--line);
-  border-radius:10px; background:var(--panel); color:var(--ink)}
+  padding:8px 0 8px; border-bottom:1px solid var(--line)}
+#q{width:100%; padding:9px 13px; font-size:15px; border:1px solid var(--line);
+  border-radius:10px; background:var(--panel); color:var(--ink); font-family:inherit}
 #q:focus{outline:2px solid var(--accent); outline-offset:0}
-.segbar{display:flex; flex-wrap:wrap; gap:7px; margin-top:11px}
-.seg{border:1px solid var(--line); background:var(--panel); color:var(--ink);
-  padding:5px 11px; border-radius:999px; font-size:13px; cursor:pointer;
-  font-family:inherit; font-weight:500}
-.seg .n{color:var(--muted); font-weight:400; margin-left:4px}
-.seg[aria-pressed="true"]{background:var(--accent); color:#fff; border-color:var(--accent)}
-.seg[aria-pressed="true"] .n{color:rgba(255,255,255,.75)}
-.orderrow{display:flex; flex-wrap:wrap; align-items:center; gap:7px; margin-top:9px}
-.orderrow .lbl{color:var(--muted); font-size:13px; margin-right:1px}
-.ord{border:1px solid var(--line); background:var(--panel); color:var(--ink);
-  padding:5px 11px; border-radius:999px; font-size:13px; cursor:pointer;
-  font-family:inherit; font-weight:500}
-.ord[aria-pressed="true"]{background:var(--accent); color:#fff; border-color:var(--accent)}
-.vidlink{margin-left:auto; font-size:12.5px; color:var(--muted); text-decoration:none;
-  border-bottom:1px dotted var(--line)}
-.vidlink:hover{color:var(--accent); border-color:var(--accent)}
-.meta .tone{display:inline-block; font-size:11px; color:var(--muted); font-weight:400;
-  border:1px solid var(--line); border-radius:999px; padding:0 7px; margin-left:6px; vertical-align:1px}
-.count{color:var(--muted); font-size:13px; padding:12px 0 2px}
-.group{margin:8px 0 26px}
-.group h2{font-size:15px; text-transform:uppercase; letter-spacing:.06em;
-  color:var(--muted); margin:18px 0 10px; font-weight:600}
-.grid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px}
-@media (max-width:760px){ .grid{grid-template-columns:repeat(2,1fr); gap:10px} }
-.card{background:var(--panel); border:1px solid var(--line); border-radius:12px;
-  overflow:hidden; box-shadow:var(--shadow)}
-.chip{position:relative; aspect-ratio:3/2; display:block; padding:9px 11px;
-  cursor:pointer}
-.chip .code{position:absolute; top:8px; right:10px; font-size:11px;
-  font-weight:600; opacity:.82; letter-spacing:.02em}
-.chip .name{position:absolute; left:11px; bottom:9px; right:11px;
-  font-family:"Noto Sans Thai",sans-serif; font-weight:600; font-size:18px;
-  line-height:1.15; word-break:break-word}
-.meta{padding:9px 11px 11px}
-.meta .lat{font-weight:600; font-size:14px}
-.meta .en{color:var(--muted); font-style:italic; font-size:13px; display:block; margin:1px 0 7px}
-.meta .row{display:flex; justify-content:space-between; gap:8px; font-size:12px;
-  color:var(--muted); font-variant-numeric:tabular-nums}
-.meta .hex{color:var(--ink); font-weight:600; cursor:pointer}
-.toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
-  background:var(--ink); color:var(--bg); padding:9px 16px; border-radius:999px;
-  font-size:13px; opacity:0; pointer-events:none; transition:opacity .18s}
-.toast.show{opacity:1}
-.empty{color:var(--muted); padding:40px 0; text-align:center}
-footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
-  padding:22px 0 50px; margin-top:20px}
-.theme{float:right; border:1px solid var(--line); background:var(--panel);
-  color:var(--ink); border-radius:8px; padding:5px 10px; font-size:13px; cursor:pointer}
-.about{background:var(--panel); border:1px solid var(--line); border-radius:12px;
-  padding:0 16px; margin-top:16px}
-.about summary{cursor:pointer; padding:14px 0; font-weight:600; font-size:15px; list-style:none}
-.about summary::-webkit-details-marker{display:none}
-.about summary::before{content:"\25b8 "; color:var(--accent)}
-.about[open] summary::before{content:"\25be "}
-.about .body{padding:0 2px 16px; font-size:14px; color:var(--ink); max-width:74ch}
-.about .body p{margin:0 0 10px}
-.envrow{display:flex; gap:18px; align-items:center; margin-top:13px; flex-wrap:wrap}
-.pad{position:relative; width:168px; height:168px; flex:0 0 auto; border-radius:50%;
+/* hue families: one row that scrolls sideways instead of wrapping */
+.segbar{display:flex; gap:6px; margin:8px -16px 0; padding:0 16px 2px;
+  overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.segbar::-webkit-scrollbar{display:none}
+.segbar{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent);
+  mask-image:linear-gradient(to right,#000 calc(100% - 28px),transparent)}
+.seg{flex:0 0 auto; display:inline-flex; align-items:center; gap:6px;
+  border:1px solid var(--line); background:var(--panel); color:var(--ink);
+  padding:4px 10px 4px 6px; border-radius:999px; font-size:12.5px; cursor:pointer;
+  font-family:inherit; font-weight:500; white-space:nowrap}
+.seg .dot{width:14px; height:14px; border-radius:50%; box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.seg .n{color:var(--muted); font-weight:400}
+.seg[aria-pressed="true"]{border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.orderrow{display:flex; align-items:center; gap:8px; margin-top:8px}
+.toggle{display:inline-flex; border:1px solid var(--line); border-radius:999px; background:var(--panel); padding:2px}
+.ord{border:0; background:transparent; color:var(--muted); padding:3px 10px; border-radius:999px;
+  font-size:12.5px; cursor:pointer; font-family:inherit; font-weight:500}
+.ord[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
+.lightbtn{margin-left:auto; border:1px solid var(--line); background:var(--panel); color:var(--ink);
+  padding:4px 11px; border-radius:999px; font-size:12.5px; cursor:pointer; font-family:inherit;
+  font-weight:500; white-space:nowrap; max-width:55%; overflow:hidden; text-overflow:ellipsis}
+.lightbtn[aria-expanded="true"]{border-color:var(--accent)}
+.lightbtn .sw{display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:5px;
+  vertical-align:-1px; box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.envrow{display:flex; gap:16px; align-items:center; margin-top:10px; flex-wrap:wrap}
+.envrow[hidden]{display:none}
+.pad{position:relative; width:136px; height:136px; flex:0 0 auto; border-radius:50%;
   border:1px solid var(--line); cursor:crosshair; touch-action:none; user-select:none;
   background:
     linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,0) 42%, rgba(0,0,0,0) 58%, rgba(0,0,0,.6)),
     linear-gradient(to right, #e8a23a, #c9c3bb 50%, #5f9fd6);
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.06), var(--shadow)}
 .pad:focus{outline:2px solid var(--accent); outline-offset:2px}
-.pad .axis{position:absolute; font-size:10px; font-weight:600; color:#2a2a26;
+.pad .axis{position:absolute; font-size:9.5px; font-weight:600; color:#2a2a26;
   text-transform:uppercase; letter-spacing:.05em; opacity:.72; pointer-events:none;
   text-shadow:0 1px 1px rgba(255,255,255,.4)}
 .pad .ax-t{top:6px; left:50%; transform:translateX(-50%)}
@@ -120,117 +62,67 @@ footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
 .pad .handle{position:absolute; width:22px; height:22px; border-radius:50%;
   transform:translate(-50%,-50%); background:#ccc; border:3px solid #fff;
   box-shadow:0 1px 4px rgba(0,0,0,.45); pointer-events:none; z-index:2}
-.envinfo{flex:1 1 220px; min-width:200px}
-.envname{font-weight:700; font-size:16px}
-.envmeta{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; margin:1px 0 8px}
-.anchorlegend{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px}
+.envinfo{flex:1 1 200px; min-width:180px}
+.envname{font-weight:700; font-size:15px}
+.envmeta{font-size:12.5px; color:var(--muted); font-variant-numeric:tabular-nums; margin:1px 0 8px}
+.anchorlegend{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:6px}
 .achip{border:1px solid var(--line); background:var(--panel); color:var(--ink);
-  padding:4px 10px; border-radius:999px; font-size:12px; cursor:pointer;
+  padding:3px 9px; border-radius:999px; font-size:12px; cursor:pointer;
   font-family:inherit; font-weight:500}
 .achip:hover{border-color:var(--accent)}
-.achip[aria-pressed="true"]{background:var(--accent); color:#fff; border-color:var(--accent)}
+.achip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
 .envhint{font-size:11px; color:var(--muted); max-width:52ch}
-.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:18px}
-@media (max-width:760px){ .cards{grid-template-columns:1fr} }
-.info{background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:13px 15px}
-.info h3{margin:0 0 7px; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--accent); font-weight:700}
-.info p{margin:0 0 7px; font-size:13px; line-height:1.5}
-.info p:last-child{margin-bottom:0}
-.info .links{display:flex; flex-wrap:wrap; gap:3px 9px}
-.info a{color:var(--accent); text-decoration:none}
-.info a:hover{text-decoration:underline}
-.downloads{font-size:13px; color:var(--muted); margin-top:12px; padding-top:13px;
-  border-top:1px solid var(--line); line-height:1.55}
-.downloads a{color:var(--accent); text-decoration:none; font-weight:600}
-.downloads a:hover{text-decoration:underline}
+.envhint a{color:var(--accent)}
+.count{color:var(--muted); font-size:12.5px; padding:10px 0 0}
+.group{margin:4px 0 18px}
+.group h2{font-size:12px; text-transform:uppercase; letter-spacing:.07em;
+  color:var(--muted); margin:14px 0 8px; font-weight:600}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(168px,1fr)); gap:12px}
+@media (max-width:520px){ .grid{grid-template-columns:repeat(2,1fr); gap:8px} }
+.card{background:var(--panel); border:1px solid var(--line); border-radius:10px;
+  overflow:hidden; box-shadow:var(--shadow)}
+.chip{position:relative; aspect-ratio:3/2; display:block; padding:8px 10px; cursor:pointer}
+.chip .code{position:absolute; top:7px; right:9px; font-size:11px;
+  font-weight:600; opacity:.82; letter-spacing:.02em}
+.chip .name{position:absolute; left:10px; bottom:8px; right:10px;
+  font-family:"Noto Sans Thai",sans-serif; font-weight:600; font-size:17px;
+  line-height:1.15; word-break:break-word}
+.meta{padding:8px 10px 9px}
+.meta .lat{font-weight:600; font-size:13.5px}
+.meta .tone{display:inline-block; font-size:10.5px; color:var(--muted); font-weight:400;
+  border:1px solid var(--line); border-radius:999px; padding:0 6px; margin-left:5px; vertical-align:1px}
+.meta .en{color:var(--muted); font-style:italic; font-size:12.5px; display:block; margin:1px 0 5px}
+.meta .row{display:flex; justify-content:space-between; gap:6px; font-size:11.5px;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+.meta .hex{color:var(--ink); font-weight:600; cursor:pointer}
+.toast{position:fixed; left:50%; bottom:26px; transform:translateX(-50%);
+  background:var(--ink); color:var(--bg); padding:9px 16px; border-radius:999px;
+  font-size:13px; opacity:0; pointer-events:none; transition:opacity .18s}
+.toast.show{opacity:1}
+.empty{color:var(--muted); padding:40px 0; text-align:center}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header>
-  <button class="theme" id="theme">◐ theme</button>
-  <h1>ThaiTone&trade; Color System</h1>
-  <p class="sub">A searchable digitisation of the physical <b>ThaiTone&trade; color fan deck</b> &mdash;
-  330 Thai traditional colors. Each color shows its code, Thai name, romanisation, English
-  meaning, the <b>CMYK as printed on the deck</b>, and an sRGB hex derived by color-managed
-  conversion for on-screen preview.</p>
-  <section class="cards">
-    <div class="info">
-      <h3>Creator</h3>
-      <p><b>Prof. Pairoj Pittayamatee</b> (ไพโรจน์ พิทยเมธี) created the ThaiTone&trade; system and its Thai color names.</p>
-      <p class="links">
-        <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">Official Facebook</a> &middot;
-        <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color deck</a> &middot;
-        <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">The Nation</a> &middot;
-        <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">Reference PDF</a>
-      </p>
-    </div>
-    <div class="info">
-      <h3>License</h3>
-      <p>The creator released the <b>whole ThaiTone&trade; color system</b> &mdash; not a single file or subset &mdash; under a <b>Creative Commons</b> license (attribution, non-commercial), permitting general use of its color values and names <b>with attribution</b> to the &ldquo;ThaiTone&rdquo; system.</p>
-      <p>Those terms expressly allow the colors to be <b>shared and adapted with attribution</b>. The restriction is narrower: the creator&rsquo;s own files and graphic color guide may not be copied or altered to sell or hand out &mdash; so this page is an independent presentation of the freely-licensed values and names, not a copy of his files.</p>
-    </div>
-    <div class="info">
-      <h3>This page</h3>
-      <p>We publish the openly-licensed <b>CMYK values</b> and, derived from them, an <b>on-screen (sRGB) approximation</b> &mdash; with the CMYK shown beside every color so anyone can check how we got there. A physical deck adds the real <b>printed</b> CMYK proof, which a screen cannot replace.</p>
-      <p>Unofficial and non-commercial; it credits the source and is not affiliated with or endorsed by the author. CMYK is transcribed from the cards; the sRGB hex is our own conversion. &ldquo;ThaiTone&trade;&rdquo; is the creator&rsquo;s trademark.</p>
-      <p>Questions, corrections or a copyright concern? Write to <span id="contact">lizard [at] lumphini [dot] org</span>.</p>
-      <script>(function(){var u='lizard',d=['lumphini','org'].join('.');document.getElementById('contact').textContent=u+'@'+d})()</script>
-    </div>
-  </section>
-
-  <p class="downloads"><b>Downloads:</b>
-    <a href="ThaiTone.ase" download>ThaiTone.ase</a> &mdash; 330 CMYK swatches for Photoshop, Illustrator, InDesign, Affinity &amp; PhotoCraft &middot;
-    <a href="thaitone.json" download>thaitone.json</a> &mdash; full data.
-    The swatches store the printed CMYK, so each app converts under its own color profile.</p>
-</header>
-
-<details class="about">
-  <summary>How these colors work &mdash; CMYK vs. screen, Thai light &amp; the viewing-light preview</summary>
-  <div class="body">
-    <p><b>CMYK is the source; the hex is an interpretation.</b> The CMYK values are printed
-    on the physical cards and are exact. There is no single &ldquo;correct&rdquo; RGB for a CMYK recipe
-    &mdash; it depends on the assumed print profile and rendering intent &mdash; so the sRGB hex here is
-    one color-managed conversion, chosen as a safe, device-independent reference.</p>
-    <p><b>Why a screen can&rsquo;t match print.</b> Screens are additive (emitted light); ink is
-    subtractive (reflected light), and their gamuts only partly overlap. Saturated reds and
-    oranges that ink prints well get clipped by sRGB, so these reference swatches are the
-    <i>quietest</i> version of the colors.</p>
-    <p><b>Thai light brings them to life.</b> ThaiTone&trade; colors live outdoors in bright tropical
-    sun, under cool mall lighting, in warm golden hour, and in the flat grey of the rainy
-    season. Perceived colorfulness rises with illumination (the Hunt effect) and shifts with the
-    light&rsquo;s color temperature, so the same color reads very differently across these settings.
-    The <b>viewing-environment disc</b> below is an <b>illustrative approximation</b> of that:
-    drag the point (vertical = brightness, horizontal = warm&harr;cool color temperature) and the
-    swatches recolor live. Named Thai scenes &mdash; beach, city, golden hour, food, night, rainy
-    season &mdash; are anchor points you can jump to. It applies a documented transform (saturation
-    and lightness from the Hunt effect, plus a white-point tint) and changes only the preview swatch
-    and the hex shown beside it &mdash; the underlying CMYK and the sRGB reference never change.</p>
-    <p><b>Why color is a wheel, not a line.</b> Physics lays color on a straight line by
-    wavelength (red&hellip;violet). Artists bend it into a wheel &mdash; and the reason is that
-    <i>purple does not exist</i> as a wavelength: it&rsquo;s a sensation the brain invents when the
-    short- and long-wave cones fire together, joining the two ends of the line. That is why
-    ThaiTone&rsquo;s own sequence runs red &rarr; &hellip; &rarr; red-violet and closes back toward red.
-    Switch the grid to <b>Artistic order</b> above to arrange each hue family by the painter&rsquo;s
-    second axis &mdash; <i>tint</i> (with white) &rarr; <i>tone</i> (greyed) &rarr; <i>shade</i>
-    (with black). <a href="https://www.youtube.com/watch?v=rE_5JLeC0kc" target="_blank" rel="noopener">A lovely explanation on video &#8599;</a></p>
-    <p><b>Some colors a screen simply cannot show.</b> The brightest inks &mdash; fluorescent ones
-    especially &mdash; can throw back more visible light than a display can emit, so they read as dull
-    earth tones on any screen while being vivid in the hand. It&rsquo;s the same reason the printed
-    deck, not this page, is the real reference.</p>
+<header class="top">
+  <div class="brand">
+    <h1>ThaiTone&trade; Colors</h1>
+    <p class="credit">330 Thai colors by Prof. Pairoj Pittayamatee &middot; CC BY-NC</p>
   </div>
-</details>
+  <nav><a class="navlink" href="about.html">About</a><button class="theme" id="theme" aria-label="Switch light / dark theme"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button></nav>
+</header>
 
 <div class="controls">
   <input id="q" type="search" placeholder="Search code, Thai, romanisation or meaning…" autocomplete="off">
   <div class="segbar" id="segbar"></div>
   <div class="orderrow">
-    <span class="lbl">Order</span>
-    <button class="ord" id="ord-deck" aria-pressed="true">Deck order</button>
-    <button class="ord" id="ord-art" aria-pressed="false">Artistic &middot; tint&rarr;shade</button>
-    <a class="vidlink" href="https://www.youtube.com/watch?v=rE_5JLeC0kc" target="_blank" rel="noopener">Why color is a wheel, not a line &mdash; video &#8599;</a>
+    <div class="toggle" role="group" aria-label="Order">
+      <button class="ord" id="ord-deck" aria-pressed="true">Deck order</button>
+      <button class="ord" id="ord-art" aria-pressed="false">Tint&rarr;shade</button>
+    </div>
+    <button class="lightbtn" id="lightbtn" aria-expanded="false" aria-controls="envpanel"><span class="sw" id="lightsw"></span><span id="lightlbl">Light</span> &#9662;</button>
   </div>
-  <div class="envrow">
+  <div class="envrow" id="envpanel" hidden>
     <div class="pad" id="pad" role="slider" tabindex="0"
          aria-label="Viewing light: drag for brightness (vertical) and color temperature (horizontal)">
       <span class="axis ax-t">bright</span>
@@ -243,8 +135,8 @@ footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
       <div class="envname" id="envname">sRGB reference</div>
       <div class="envmeta" id="envmeta"></div>
       <div class="anchorlegend" id="anchorlegend"></div>
-      <div class="envhint">Illustrative preview &mdash; drag inside the disc or tap a scene. The
-        swatch and its hex show the derived value; the sRGB reference and CMYK data never change.</div>
+      <div class="envhint">Illustrative preview of how the colors read in Thai light; the CMYK
+        data never change. <a href="about.html#light">How this works</a></div>
     </div>
   </div>
 </div>
@@ -253,8 +145,11 @@ footer{color:var(--muted); font-size:12px; border-top:1px solid var(--line);
 
 <footer>
   ThaiTone&trade; color system by Prof. Pairoj Pittayamatee &mdash; ThaiTone&trade; is his brand / trademark.
-  This page is an unofficial, non-commercial digitisation for study and reference. CMYK as printed on
-  the deck; sRGB hex is an independent color-managed conversion. — <span id="meta-note"></span>
+  Unofficial, non-commercial digitisation for study and reference.
+  <a href="about.html">About &amp; license</a> &middot;
+  Downloads: <a href="ThaiTone.ase" download>ThaiTone.ase</a> &middot; <a href="thaitone.json" download>thaitone.json</a> &middot;
+  Contact: <span class="contact">lizard [at] lumphini [dot] org</span>
+  <span class="note" id="meta-note"></span>
 </footer>
 </div>
 <div class="toast" id="toast"></div>
@@ -333,10 +228,21 @@ function adjust(hex){
 const segbar = document.getElementById("segbar");
 const segCounts = {};
 cols.forEach(c => segCounts[c.segment] = (segCounts[c.segment]||0)+1);
+// each family's dot: its most saturated mid-light color
+const segDot = {};
+DATA.segments.forEach(seg => {
+  let best = null, bs = -1;
+  cols.filter(c => c.segment===seg).forEach(c => {
+    const [, sat, l] = hslFromHex(c.hex); const sc = sat * (1 - Math.abs(l - 0.5) * 1.6);
+    if(sc > bs){ bs = sc; best = c.hex; }
+  });
+  segDot[seg] = best;
+});
 function mkSeg(key, label){
   const b = document.createElement("button");
   b.className = "seg"; b.setAttribute("aria-pressed", activeSeg===key);
-  b.innerHTML = label + ' <span class="n">' + (key===null?cols.length:segCounts[key]) + '</span>';
+  const dot = key===null ? 'conic-gradient(#c8102e,#f39200,#ffd100,#43b02a,#0085ca,#5f259f,#c8102e)' : segDot[key];
+  b.innerHTML = '<span class="dot" style="background:' + dot + '"></span>' + label + ' <span class="n">' + (key===null?cols.length:segCounts[key]) + '</span>';
   b.onclick = () => { activeSeg = (activeSeg===key?null:key); if(key===null) activeSeg=null; render(); updateSegs(); };
   b.dataset.key = key===null ? "__all__" : key;
   return b;
@@ -437,11 +343,9 @@ document.getElementById("ord-art").onclick  = () => setOrder("art");
 
 // theme toggle
 const root = document.documentElement;
-try { const t = localStorage.getItem("tt-theme"); if(t) root.setAttribute("data-theme", t); } catch(e){}
 document.getElementById("theme").onclick = () => {
   const cur = root.getAttribute("data-theme");
-  const next = cur==="dark" ? "light" : (cur==="light" ? "dark" :
-    (matchMedia("(prefers-color-scheme:dark)").matches ? "light" : "dark"));
+  const next = cur==="dark" ? "light" : "dark";
   root.setAttribute("data-theme", next);
   try { localStorage.setItem("tt-theme", next); } catch(e){}
 };
@@ -452,6 +356,14 @@ const handle = document.getElementById("handle");
 const envnameEl = document.getElementById("envname");
 const envmetaEl = document.getElementById("envmeta");
 const legend = document.getElementById("anchorlegend");
+const lightbtn = document.getElementById("lightbtn");
+const lightlbl = document.getElementById("lightlbl");
+const lightsw = document.getElementById("lightsw");
+const envpanel = document.getElementById("envpanel");
+lightbtn.onclick = () => {
+  const open = envpanel.hidden;
+  envpanel.hidden = !open; lightbtn.setAttribute("aria-expanded", open);
+};
 
 // anchor markers in the disc + clickable legend chips
 ENV_ANCHORS.forEach(a => {
@@ -471,6 +383,7 @@ function updateEnvInfo(x, y){
   const bright = y > 0.15 ? "bright" : (y < -0.15 ? "dark" : "mid");
   const temp = x < -0.15 ? "warm" : (x > 0.15 ? "cool" : "neutral");
   envnameEl.textContent = a ? a.label : "Custom light";
+  lightlbl.textContent = a ? (a.key==="ref" ? "Light" : a.label) : "Custom light";
   envmetaEl.textContent = a ? (a.lux + " · " + a.cct + " — " + a.note)
                             : (bright + ", " + temp + " light");
   [...legend.children].forEach(c => c.setAttribute("aria-pressed", a && c.dataset.key === a.key));
@@ -487,6 +400,7 @@ function setPoint(x, y){
   handle.style.left = (50 + x * 50) + "%";
   handle.style.top  = (50 - y * 50) + "%";
   handle.style.background = adjust("#B4B1AA");
+  lightsw.style.background = adjust("#B4B1AA");
   updateEnvInfo(x, y);
   scheduleApply();
 }
@@ -513,6 +427,8 @@ pad.addEventListener("keydown", e => {
 });
 
 render(); updateSegs(); setPoint(0, 0);
+(function(){ const a = 'lizard' + '\u0040' + ['lumphini','org'].join('.');
+  document.querySelectorAll('.contact').forEach(e => e.textContent = a); })();
 </script>
 </body>
 </html>

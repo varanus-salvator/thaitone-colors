@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — ThaiTone&trade; Color System</title>
+<meta name="description" content="About this digitisation of the ThaiTone(TM) color fan deck by Prof. Pairoj Pittayamatee: creator, license, how the on-screen colors are derived, downloads and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>try{const t=localStorage.getItem("tt-theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<style>
+main{max-width:68ch; padding-bottom:8px}
+.lead{font-size:16px; margin:8px 0 22px}
+section{margin:0 0 26px}
+h2{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
+  font-weight:700; margin:0 0 8px}
+p{margin:0 0 10px; font-size:14.5px}
+.links{display:flex; flex-wrap:wrap; gap:4px 14px; font-size:14px}
+.links a, .dl a{text-decoration:none; font-weight:600}
+.links a:hover, .dl a:hover{text-decoration:underline}
+.dl{list-style:none; padding:0; margin:0}
+.dl li{margin:0 0 6px; font-size:14.5px}
+.back{display:inline-block; margin:6px 0 4px; font-size:14px; font-weight:600; text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand"><h1><a href="./">ThaiTone&trade; Colors</a></h1></div>
+  <nav><a class="navlink" href="./">Colors</a><button class="theme" id="theme" aria-label="Switch light / dark theme"><svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg></button></nav>
+</header>
+
+<main>
+  <p class="lead">A searchable digitisation of the physical <b>ThaiTone&trade; color fan deck</b> &mdash;
+  330 Thai traditional colors. Each color shows its code, Thai name, romanisation, English
+  meaning, the <b>CMYK as printed on the deck</b>, and an sRGB hex derived by color-managed
+  conversion for on-screen preview.</p>
+
+  <section>
+    <h2>Creator</h2>
+    <p><b>Prof. Pairoj Pittayamatee</b> (ไพโรจน์ พิทยเมธี) created the ThaiTone&trade; system and its Thai color names.</p>
+    <p class="links">
+      <a href="https://www.facebook.com/thaitonecolor/" target="_blank" rel="noopener">Official Facebook</a>
+      <a href="https://www.facebook.com/thaitonecolor/posts/706089547539678/" target="_blank" rel="noopener">330-color deck</a>
+      <a href="https://www.nationthailand.com/news/sunday/aec/30279713" target="_blank" rel="noopener">The Nation</a>
+      <a href="https://www.thailibrary.in.th/wp-content/uploads/2015/10/Thaitone-Color.pdf" target="_blank" rel="noopener">Reference PDF</a>
+    </p>
+  </section>
+
+  <section>
+    <h2>License</h2>
+    <p>The creator released the <b>whole ThaiTone&trade; color system</b> &mdash; not a single file or subset &mdash; under a <b>Creative Commons</b> license (attribution, non-commercial), permitting general use of its color values and names <b>with attribution</b> to the &ldquo;ThaiTone&rdquo; system.</p>
+    <p>Those terms expressly allow the colors to be <b>shared and adapted with attribution</b>. The restriction is narrower: the creator&rsquo;s own files and graphic color guide may not be copied or altered to sell or hand out &mdash; so this page is an independent presentation of the freely-licensed values and names, not a copy of his files.</p>
+  </section>
+
+  <section>
+    <h2>This page</h2>
+    <p>We publish the openly-licensed <b>CMYK values</b> and, derived from them, an <b>on-screen (sRGB) approximation</b> &mdash; with the CMYK shown beside every color so anyone can check how we got there. A physical deck adds the real <b>printed</b> CMYK proof, which a screen cannot replace.</p>
+    <p>Unofficial and non-commercial; it credits the source and is not affiliated with or endorsed by the author. CMYK is transcribed from the cards; the sRGB hex is our own conversion. &ldquo;ThaiTone&trade;&rdquo; is the creator&rsquo;s trademark.</p>
+    <p>Questions, corrections or a copyright concern? Write to <span class="contact">lizard [at] lumphini [dot] org</span>.</p>
+  </section>
+
+  <section>
+    <h2>Downloads</h2>
+    <ul class="dl">
+      <li><a href="ThaiTone.ase" download>ThaiTone.ase</a> &mdash; 330 CMYK swatches for Photoshop, Illustrator, InDesign, Affinity &amp; PhotoCraft</li>
+      <li><a href="thaitone.json" download>thaitone.json</a> &mdash; full data</li>
+    </ul>
+    <p>The swatches store the printed CMYK, so each app converts under its own color profile.</p>
+  </section>
+
+  <section>
+    <h2>How these colors work</h2>
+    <p><b>CMYK is the source; the hex is an interpretation.</b> The CMYK values are printed
+    on the physical cards and are exact. There is no single &ldquo;correct&rdquo; RGB for a CMYK recipe
+    &mdash; it depends on the assumed print profile and rendering intent &mdash; so the sRGB hex here is
+    one color-managed conversion, chosen as a safe, device-independent reference.</p>
+    <p><b>Why a screen can&rsquo;t match print.</b> Screens are additive (emitted light); ink is
+    subtractive (reflected light), and their gamuts only partly overlap. Saturated reds and
+    oranges that ink prints well get clipped by sRGB, so these reference swatches are the
+    <i>quietest</i> version of the colors.</p>
+    <p id="light"><b>Thai light brings them to life.</b> ThaiTone&trade; colors live outdoors in bright tropical
+    sun, under cool mall lighting, in warm golden hour, and in the flat grey of the rainy
+    season. Perceived colorfulness rises with illumination (the Hunt effect) and shifts with the
+    light&rsquo;s color temperature, so the same color reads very differently across these settings.
+    The <b>viewing-light disc</b> on the colors page (the <b>Light</b> button) is an <b>illustrative approximation</b> of that:
+    drag the point (vertical = brightness, horizontal = warm&harr;cool color temperature) and the
+    swatches recolor live. Named Thai scenes &mdash; beach, city, golden hour, food, night, rainy
+    season &mdash; are anchor points you can jump to. It applies a documented transform (saturation
+    and lightness from the Hunt effect, plus a white-point tint) and changes only the preview swatch
+    and the hex shown beside it &mdash; the underlying CMYK and the sRGB reference never change.</p>
+    <p><b>Why color is a wheel, not a line.</b> Physics lays color on a straight line by
+    wavelength (red&hellip;violet). Artists bend it into a wheel &mdash; and the reason is that
+    <i>purple does not exist</i> as a wavelength: it&rsquo;s a sensation the brain invents when the
+    short- and long-wave cones fire together, joining the two ends of the line. That is why
+    ThaiTone&rsquo;s own sequence runs red &rarr; &hellip; &rarr; red-violet and closes back toward red.
+    The <b>Tint&rarr;shade</b> order on the colors page arranges each hue family by the painter&rsquo;s
+    second axis &mdash; <i>tint</i> (with white) &rarr; <i>tone</i> (greyed) &rarr; <i>shade</i>
+    (with black). <a href="https://www.youtube.com/watch?v=rE_5JLeC0kc" target="_blank" rel="noopener">A lovely explanation on video &#8599;</a></p>
+    <p><b>Some colors a screen simply cannot show.</b> The brightest inks &mdash; fluorescent ones
+    especially &mdash; can throw back more visible light than a display can emit, so they read as dull
+    earth tones on any screen while being vivid in the hand. It&rsquo;s the same reason the printed
+    deck, not this page, is the real reference.</p>
+  </section>
+
+  <a class="back" href="./">&larr; Back to the 330 colors</a>
+</main>
+
+<footer>
+  ThaiTone&trade; color system by Prof. Pairoj Pittayamatee &mdash; ThaiTone&trade; is his brand / trademark.
+  This page is an unofficial, non-commercial digitisation for study and reference.
+</footer>
+</div>
+<script>
+(function(){var a='lizard'+'@'+['lumphini','org'].join('.');document.querySelectorAll('.contact').forEach(function(e){e.textContent=a})})();
+document.getElementById("theme").onclick=function(){var r=document.documentElement,n=r.getAttribute("data-theme")==="dark"?"light":"dark";r.setAttribute("data-theme",n);try{localStorage.setItem("tt-theme",n)}catch(e){}};
+</script>
+</body>
+</html>
